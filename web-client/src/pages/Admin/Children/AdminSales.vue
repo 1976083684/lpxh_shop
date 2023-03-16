@@ -18,12 +18,13 @@
        <el-table-column prop="is_pay" label="是否完成" width="130">
         <template slot-scope="scope">
           <span v-if="scope.row.is_pay == 1">已完成订单</span>
+          <span v-if="scope.row.is_pay == 3">派送中</span></span></span>
           <el-button
             size="small"
             type="primary"
             v-if="scope.row.is_pay == 2"
             @click="changeorder_pay(scope.row.id)"
-            >完成订单</el-button
+            >立即派送</el-button
           >
         </template>
       </el-table-column>
@@ -43,11 +44,11 @@ export default {
   },
   methods: {
     changeorder_pay(id) {
-      pay([id], 1).then(() => {
+      pay([id], 3).then(() => {
         this.fetchdata();
         this.$message({
           type: "success",
-          message: "完成订单成功"
+          message: "订单派送成功"
         });
       });
     },
@@ -58,6 +59,7 @@ export default {
           console.log(item.price)
           item.price = item.price / 100 + '元';
          });
+         console.log(res.message)
         this.tableData = res.message;
       });
     }

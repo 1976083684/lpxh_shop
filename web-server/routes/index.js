@@ -1023,7 +1023,7 @@ router.get('/api/orders', (req, res) => {
             cart
         LEFT JOIN user_info ON cart.user_id = user_info.id
 
-        where cart.is_pay in (1,2) order by cart.pay_time desc
+        where cart.is_pay in (1,2,3) order by cart.pay_time desc
     `;
 
     conn.query(sqlStr, (error, results, fields) => {
